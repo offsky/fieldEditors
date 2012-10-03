@@ -16,7 +16,7 @@ function(app, Toodledo) {
         var task = new Toodledo.Task();
         
         app.useLayout("main").setViews({
-            ".task": new Toodledo.Views.Task({
+            ".tasks": new Toodledo.Views.Task({
               collection: task
             })
         }).render();        

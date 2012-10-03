@@ -6,9 +6,9 @@ function(app, Backbone) {
     
     var TextField = {
         
-        validateString: function( value, charLength ) {
+        validateString: function( value ) {
             
-            console.log("Validating:" + value + "; Max Length: " + charLength);
+            console.log("Validating:" + value);
             
             //testing
             return true;

@@ -9,7 +9,7 @@ function(app, Backbone, Views) {
     
     Toodledo.Model = Backbone.Model.extend({
         defaults: {
-            title: '',
+            name: '',
             duration: '',
             completed: false
         },
@@ -35,17 +35,17 @@ function(app, Backbone, Views) {
         model: Toodledo.Model,
 
         // Save all of the todo items under the `"todos"` namespace.
-        localStorage: new Store("toodledo-backbone"),
+        localStorage: new Store("tdl"),
 
         initialize: function() {
             //remove items from localStorage and re-populate        
-            if (localStorage.getItem("toodledo-backbone")) {
-                console.log("removing toodledo-backbone");
-                localStorage.removeItem("toodledo-backbone");
+            if (localStorage.getItem("tdl")) {
+                console.log("removing tdl");
+                localStorage.removeItem("tdl");
             }
             
-            var sampleTask = {"613ecd3f-c2d9-46eb-739d-1b6de9661325":{"title":"Sample Task 2","duration":"1 hour","completed":false,"order":1,"id":"613ecd3f-c2d9-46eb-739d-1b6de9661325"},"7c5b28c0-685b-39a0-b221-5f6e9c581c43":{"title":"Sample Task 1","duration":"30 mins","completed":false,"order":2,"id":"7c5b28c0-685b-39a0-b221-5f6e9c581c43"}}
-            localStorage.setItem("toodledo-backbone", JSON.stringify(sampleTask));
+            var sampleTask = {"613ecd3f-c2d9-46eb-739d-1b6de9661325":{"name":"Sample Task 2","duration":"1 hour","completed":false,"order":1,"id":"613ecd3f-c2d9-46eb-739d-1b6de9661325"},"7c5b28c0-685b-39a0-b221-5f6e9c581c43":{"name":"Sample Task 1","duration":"30 mins","completed":false,"order":2,"id":"7c5b28c0-685b-39a0-b221-5f6e9c581c43"}}
+            localStorage.setItem("tdl", JSON.stringify(sampleTask));
         },
         
         // Filter down the list of all todo items that are finished.
