@@ -12,8 +12,7 @@ function(app, Toodledo) {
       "": "index"
     },
 
-    index: function() {
-        
+    index: function() {        
         var task = new Toodledo.Task();
         
         app.useLayout("main").setViews({
@@ -22,7 +21,8 @@ function(app, Toodledo) {
             })
         }).render();        
         
-        task.fetch();
+        task.fetch();    
+        
     }
     
     
