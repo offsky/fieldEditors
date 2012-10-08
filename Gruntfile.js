@@ -12,14 +12,18 @@ module.exports = function( grunt ) {
 
     // specify an alternate install location for Bower
     bower: {
-      dir: 'app/scripts/vendor'
+      dir: 'app/components'
     },
 
     // Coffee to JS compilation
     coffee: {
-      dist: {
-        src: 'app/scripts/**/*.coffee',
-        dest: 'app/scripts'
+      compile: {
+        files: {
+          'temp/js/*.js': 'app/js/**/*.coffee'
+        },
+        options: {
+          basePath: 'app/js'
+        }
       }
     },
 
@@ -28,10 +32,10 @@ module.exports = function( grunt ) {
       dist: {
         // http://compass-style.org/help/tutorials/configuration-reference/#configuration-properties
         options: {
-          css_dir: 'temp/styles',
-          sass_dir: 'app/styles',
+          css_dir: 'temp/css',
+          sass_dir: 'app/css',
           images_dir: 'app/images',
-          javascripts_dir: 'temp/scripts',
+          javascripts_dir: 'temp/js',
           force: true
         }
       }
@@ -42,28 +46,24 @@ module.exports = function( grunt ) {
       dest: ''
     },
 
-    // headless testing through PhantomJS
-    mocha: {
-      all: ['test/**/*.html']
-    },
-
     // default watch configuration
     watch: {
       coffee: {
-        files: '<config:coffee.dist.src>',
+        files: 'app/js/**/*.coffee',
         tasks: 'coffee reload'
       },
       compass: {
         files: [
-          'app/styles/**/*.{scss,sass}'
+          'app/csss/**/*.{scss,sass}'
         ],
         tasks: 'compass reload'
       },
       reload: {
         files: [
           'app/*.html',
-          'app/styles/**/*.css',
-          'app/scripts/**/*.js',
+          'app/css/**/*.css',
+          'app/css/**/*.js',
+          'app/partials/**/*.html',
           'app/images/**/*'
         ],
         tasks: 'reload'
@@ -75,8 +75,8 @@ module.exports = function( grunt ) {
     lint: {
       files: [
         'Gruntfile.js',
-        'app/scripts/**/*.js',
-        'spec/**/*.js'
+        'app/js/**/*.js',
+        'unit/**/*.js'
       ]
     },
 
@@ -97,7 +97,7 @@ module.exports = function( grunt ) {
         browser: true
       },
       globals: {
-        jQuery: true
+        angular: true
       }
     },
 
@@ -120,14 +120,14 @@ module.exports = function( grunt ) {
 
     // concat css/**/*.css files, inline @import, output a single minified css
     css: {
-      'styles/index.css': ['styles/**/*.css']
+      'css/main.css': ['css/**/*.css']
     },
 
     // renames JS/CSS to prepend a hash of their contents for easier
     // versioning
     rev: {
-      js: 'scripts/**/*.js',
-      css: 'styles/**/*.css',
+      js: 'js/**/*.js',
+      css: 'css/**/*.css',
       img: 'images/**'
     },
 
@@ -163,13 +163,18 @@ module.exports = function( grunt ) {
     rjs: {
       // no minification, is done by the min task
       optimize: 'none',
-      baseUrl: './scripts',
-      wrap: true,
-      name: 'config'
-    },
+      baseUrl: './js',
+      wrap: true
+    }
   });
 
-  // Alias the `test` task to run the `mocha` task instead
-  grunt.registerTask('test', 'mocha');
+  // Alias the `test` task to run `testacular` instead
+  grunt.registerTask('test', 'run the testacular test driver', function () {
+    var done = this.async();
+    require('child_process').exec('testacular start --single-run', function (err, stdout) {
+      grunt.log.write(stdout);
+      done(err);
+    });
+  });
 
 };
