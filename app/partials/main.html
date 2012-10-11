@@ -1,6 +1,11 @@
-<div class="task">
-  <div ng-repeat="task in tasks">
-    <div>Task Name: <input type="text" name="task.title" ng-model="task.title" ng-click="blurCallback()" /></div>
-    <div>Task Length: {{task.length}}</div>
+<div class="task" ng-repeat="task in tasks">
+  <div class="field">
+    <label>Task Name:</label> 
+    <input type="text" name="taskTitle" ng-model="task.title" ui-event="{blur: 'updateTaskName()'}" required />
+  </div>
+  
+  <div class="field">
+    <label>Task Length:</label> 
+    <input type="text" name="taskLength" ng-model="task.length" ui-event="{blur: 'updateTaskLength()'}" />
   </div>
 </div>
