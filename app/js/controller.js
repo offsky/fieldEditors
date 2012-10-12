@@ -3,6 +3,14 @@
 fieldEditorsApp.controller('AppCtrl', function($scope, allTasks) {
   var tasks = $scope.tasks = allTasks.get();
 
+  $scope.pickerOptions = {
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'mm/dd/yy',
+    controlType: 'select',
+    ampm: true
+  };
+  
   $scope.updateTaskName = function() {
     allTasks.put(tasks);
   };
@@ -10,6 +18,11 @@ fieldEditorsApp.controller('AppCtrl', function($scope, allTasks) {
   $scope.updateTaskLength = function() {
     
     console.log($scope.convertStringToMinutes(this.task.length, 1));    
+  };
+
+  $scope.updateStartDateTime = function() {
+    //console.log(this.task.startDate);
+    allTasks.put(tasks);
   };
 
   $scope.convertStringToMinutes = function(a, b) {

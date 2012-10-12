@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var fieldEditorsApp = angular.module('fieldEditorsApp', ['taskServices', 'ui'])
+var fieldEditorsApp = angular.module('fieldEditorsApp', ['taskServices', 'ui', 'taskDirectives'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {

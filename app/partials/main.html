@@ -8,4 +8,9 @@
     <label>Task Length:</label> 
     <input type="text" name="taskLength" ng-model="task.length" ui-event="{blur: 'updateTaskLength()'}" />
   </div>
+
+  <div class="field">
+    <label>Start Date and Time:</label>
+    <input name="taskStartDateTime" type="text" ui-jq="datetimepicker" ui-options="pickerOptions" ng-model="task.startDate" ui-event="{blur: 'updateStartDateTime()'}" />
+  </div>
 </div>
