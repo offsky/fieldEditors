@@ -1,10 +1,15 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 .wrapper{width:960px;margin:10px auto;}
+h1,h2,h3,h4{clear:both;margin:0;}
+h3{margin-top:10px;}
+h4{display:inline;}
+input{width:250px;}
+.container{display:table;margin-bottom:15px;}
 
 .task{clear:left;float:left;background:#bfbfbf;padding:0 10px 10px 10px;width:100%;}
 .field{float:left;margin:10px 5px 0 0;width:200px;}
-input{background:#bfbfbf;border:none;width:100%;}
-input:focus{background:#fff;}
+.task input{background:#bfbfbf;border:none;width:100%;}
+.task input:focus{background:#fff;}
 .field label{display:block;}
 
 

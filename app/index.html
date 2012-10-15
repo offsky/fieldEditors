@@ -21,7 +21,27 @@
         <!-- Add your site or application content here -->
         <div class="wrapper">
           <h1>Tasks</h1>      
-          <div class="container" ng-view></div>
+          <div class="container" ng-controller="appCtrl" ng-view></div>
+
+          <h2>Filters</h2>
+          <div class="container" ng-controller="appFilters">
+            <div>
+              <h3>Date &amp; Time Filters</h3>
+              <input type="text" ng-model="currentDate" /><br />
+              <h4>Date:</h4> <b>'yyyy':</b> {{ currentDate | date: 'yyyy' }}, 
+              <b>'yy':</b> {{ currentDate | date: 'yy' }},<br />
+              <h4>Time:</h4> <b>'h:mm:ss a':</b> {{ currentDate | date: 'h:mm:ss a' }},
+              <b>'h:mm a':</b> {{ currentDate | date: 'h:mm a' }}
+
+              <h3>Currency Filters</h3>
+              <input type="text" ng-model="amount" /><br />
+              <h4>US Dollars</h4> <b>'default - $':</b> {{ amount | currency }}<br />
+              <h4>Rubbles</h4> <b>'RUB':</b> {{ amount | currency: 'RUB' }}
+            </div>   
+                     
+          </div>
+          
+          
         </div>
 	      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
@@ -34,6 +54,7 @@
         <script src="js/controller.js"></script>
         <script src="js/services.js"></script>
         <script src="js/directives.js"></script>
+        <script src="js/filters.js"></script>
         <!-- endbuild -->
         
     </body>

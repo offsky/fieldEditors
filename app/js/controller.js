@@ -1,8 +1,8 @@
 'use strict';
 
-fieldEditorsApp.controller('AppCtrl', function($scope, allTasks) {
+fieldEditorsApp.controller('appCtrl', function($scope, allTasks) {
   var tasks = $scope.tasks = allTasks.get();
-
+  
   $scope.pickerOptions = {
     changeMonth: true,
     changeYear: true,
@@ -10,18 +10,9 @@ fieldEditorsApp.controller('AppCtrl', function($scope, allTasks) {
     controlType: 'select',
     ampm: true
   };
-  
-  $scope.updateTaskName = function() {
-    allTasks.put(tasks);
-  };
 
-  $scope.updateTaskLength = function() {
-    
-    console.log($scope.convertStringToMinutes(this.task.length, 1));    
-  };
-
-  $scope.updateStartDateTime = function() {
-    //console.log(this.task.startDate);
+  $scope.updateField = function() {
+    console.log("saving tasks");
     allTasks.put(tasks);
   };
 
@@ -34,4 +25,11 @@ fieldEditorsApp.controller('AppCtrl', function($scope, allTasks) {
     return 0 == c || isNaN(c) ? 0 : c
 
   }
+});
+
+
+fieldEditorsApp.controller('appFilters', function($scope) {
+  var rightNow = new Date();
+  $scope.currentDate = rightNow;
+  $scope.amount = 1234.56;
 });
