@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width"/>
         <link rel="stylesheet" href="css/main.css"/>
 	      <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="css/jRating.jquery.css">
+        <!--<link rel="stylesheet" href="css/jRating.jquery.css">-->
 
     </head>
     <body ng-app="fieldEditorsApp">
@@ -30,7 +30,7 @@
               <b>{{ true | checkmark }} Year:</b> {{ 1350400707*1000 | date: 'yyyy' }} <i> Should display year</i><br />
               <b>{{ true | checkmark }} Time:</b> {{ 1350400707*1000 | date: 'shortTime' }} <i> Should display time</i><br />
               <b>{{ true | checkmark }} Date + Time:</b> {{ 1350400707*1000 | date: 'medium' }} <i> Should display date with time</i><br />
-              <b>Length:</b> {{ 60 | length }} <i> Should display 1 hr.</i><br />
+              <b>{{ true | checkmark }} Length:</b> {{ 60 | length }} <i> Should display 1 hr.</i><br />
               <b>{{ true | checkmark }} Percent:</b> {{ 34 | percent}} <i> Should display 34%</i><br />
               <b>{{ true | checkmark }} Integer:</b> {{ 1000 | number}} <i> Should display 1,000</i><br />
               <b>{{ true | checkmark }} Decimal:</b> {{ 1000.235 | number:2}} <i> Should display 1,000.24</i><br />
@@ -41,7 +41,7 @@
               <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | linky'></span> <i> Should display a clickable
                 link</i><br />
               <b>Location:</b> TBD</i><br />
-              <b>Rating:</b> <div ng-bind-html-unsafe='2.7 | rating'></div> <i> Should display 5 stars with the first 2.3 filled in</i><br />
+              <b>{{ true | checkmark }} Rating:</b> <div ng-bind-html-unsafe='2.3 | rating'></div> <i> Should display 5 stars with the first 2.3 filled in</i><br />
               <b>{{ true | checkmark }} Checkbox:</b> {{ true | checkmark }} <i> Should display a checked box</i><br />
               <b>Star:</b> {{ true | star }} <i> Should display an icon of a star</i><br />
               <b>{{ true | checkmark }} Phone Number: </b> <span ng-bind-html='"760-230-1683" | phone'></span> <i> Should display a link that
@@ -65,7 +65,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script src="js/lib/jquery/jquery-ui-timepicker-addon.js"></script>
-        <script src="js/lib/jquery/jRating.jquery.js"></script>
+        <!--<script src="js/lib/jquery/jRating.jquery.js"></script>-->
         <script src="js/lib/angular/angular.js"></script>
         <script src="js/lib/angular/angular-sanitize.js"></script>
         <script src="js/lib/angular-ui/angular-ui.js"></script>

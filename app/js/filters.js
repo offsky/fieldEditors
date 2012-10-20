@@ -9,19 +9,19 @@ filters.filter('checkmark', function() {
 
 filters.filter('length', function() {
     return function(input) {
-        console.log(input);
+
         var clean = parseInt(input),
             output, mod, hours;
 
         if(clean < 60 && clean > 0) {
-            output = (clean === 1) ? clean + ' min' : clean + ' mins';
+            output = (clean === 1) ? clean + 'min' : clean + 'mins';
         } else if (clean >= 60){
             mod = clean % 60;
             hours = Math.round(clean / 60);
-            output =  (hours === 1) ? hours + ' hr ': hours + ' hrs ';
+            output =  (hours === 1) ? hours + 'hr': hours + 'hrs';
 
             if (mod > 0 ) {
-                output += (mod === 1) ? mod + ' min': mod + ' mins';
+                output += (mod === 1) ? ' ' + mod + 'min': ' ' + mod + 'mins';
             }
         } else {
             //catching negative values
@@ -39,9 +39,14 @@ filters.filter('percent', function() {
 
 filters.filter('rating', function() {
     return function(input) {
-        var html;
-        html = '<div id="'+Number(input)+'_1" class="rating"></div>';
-        html +='<script>$(".rating").jRating({rateMax:5,decimalLength:1,isDisabled:true,showRateInfo:false});</script>';
+        var starW = 23,
+            clean = parseFloat(input),
+            containerW = starW * 5,
+            bgW = clean / 5 * containerW,
+            html;
+
+        html = '<div class="rating" style="width:'+containerW+'px;"><div class="bg" style="width:'+bgW+'px;"></div>' +
+            '<div class="stars"></div></div>';
 
         return html;
     };
@@ -56,8 +61,8 @@ filters.filter('star', function() {
 filters.filter('phone', function($filter) {
     return function(input) {
         var clean = input.replace(/-/g, ""),
-            output = '<a href="tel:'+clean+'">'+input+'</a>';
-        return output;
+            html = '<a href="tel:'+clean+'">'+input+'</a>';
+        return html;
     };
 });
 
@@ -86,6 +91,7 @@ filters.filter('isbn', function() {
             html;
 
         html = '<a href="http://www.amazon.com/s/field-keywords=' + clean +'">'+input+'</a>';
+
         return html;
     };
 });

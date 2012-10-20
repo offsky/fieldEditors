@@ -14,7 +14,7 @@ angular.module('taskServices', []).
           },
           {
             "name":  "taskLength",
-            "value":  "20 minutes",
+            "value":  "20",
             "type":   "length"
           },
           {
