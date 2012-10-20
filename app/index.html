@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width"/>
         <link rel="stylesheet" href="css/main.css"/>
 	      <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="css/jRating.jquery.css">
 
     </head>
     <body ng-app="fieldEditorsApp">
@@ -40,7 +41,7 @@
               <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | linky'></span> <i> Should display a clickable
                 link</i><br />
               <b>Location:</b> TBD</i><br />
-              <b>Rating:</b> {{ 2.3 | rating}} <i> Should display 5 stars with the first 2.3 filled in</i><br />
+              <b>Rating:</b> <div ng-bind-html-unsafe='2.7 | rating'></div> <i> Should display 5 stars with the first 2.3 filled in</i><br />
               <b>{{ true | checkmark }} Checkbox:</b> {{ true | checkmark }} <i> Should display a checked box</i><br />
               <b>Star:</b> {{ true | star }} <i> Should display an icon of a star</i><br />
               <b>{{ true | checkmark }} Phone Number: </b> <span ng-bind-html='"760-230-1683" | phone'></span> <i> Should display a link that
@@ -56,6 +57,7 @@
                 <span style='{{"frog" | icon}}' class="icon"></span></p>
               <b>{{ true | checkmark }} ISBN: </b> <span ng-bind-html='"978-1-44-934485-6" | isbn'></span> <i> A clickable link to Amazon that searches for the product.</i><br />
 
+
           </div>
           
         </div>
@@ -63,6 +65,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script src="js/lib/jquery/jquery-ui-timepicker-addon.js"></script>
+        <script src="js/lib/jquery/jRating.jquery.js"></script>
         <script src="js/lib/angular/angular.js"></script>
         <script src="js/lib/angular/angular-sanitize.js"></script>
         <script src="js/lib/angular-ui/angular-ui.js"></script>

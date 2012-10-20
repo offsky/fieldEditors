@@ -1,5 +1,4 @@
 'use strict';
-
 var filters = angular.module('taskFilters', ['ngSanitize']);
 
 filters.filter('checkmark', function() {
@@ -8,11 +7,28 @@ filters.filter('checkmark', function() {
   };
 });
 
-
 filters.filter('length', function() {
-  return function(input) {
-    return 'length';
-  };
+    return function(input) {
+        console.log(input);
+        var clean = parseInt(input),
+            output, mod, hours;
+
+        if(clean < 60 && clean > 0) {
+            output = (clean === 1) ? clean + ' min' : clean + ' mins';
+        } else if (clean >= 60){
+            mod = clean % 60;
+            hours = Math.round(clean / 60);
+            output =  (hours === 1) ? hours + ' hr ': hours + ' hrs ';
+
+            if (mod > 0 ) {
+                output += (mod === 1) ? mod + ' min': mod + ' mins';
+            }
+        } else {
+            //catching negative values
+            output = '0';
+        }
+        return output;
+    };
 });
 
 filters.filter('percent', function() {
@@ -22,9 +38,13 @@ filters.filter('percent', function() {
 });
 
 filters.filter('rating', function() {
-  return function(input) {
-    return 'rating';
-  };
+    return function(input) {
+        var html;
+        html = '<div id="'+Number(input)+'_1" class="rating"></div>';
+        html +='<script>$(".rating").jRating({rateMax:5,decimalLength:1,isDisabled:true,showRateInfo:false});</script>';
+
+        return html;
+    };
 });
 
 filters.filter('star', function() {
@@ -40,13 +60,6 @@ filters.filter('phone', function($filter) {
         return output;
     };
 });
-
-filters.filter('email', function() {
-  return function(input) {
-    return 'email';
-  };
-});
-
 
 filters.filter('icon', function() {
     return function(input) {
