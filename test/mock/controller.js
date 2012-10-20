@@ -1,22 +1,22 @@
 'use strict';
 
-describe('Controller: MainCtrl', function() {
+describe('Controller: appCtrl', function() {
 
   // load the controller's module
   beforeEach(module('fieldEditorsApp'));
 
-  var MainCtrl,
+  var appCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($controller) {
     scope = {};
-    MainCtrl = $controller('MainCtrl', {
+    appCtrl = $controller('appCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function() {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should attach a list of tasks to the scope', function() {
+    expect(scope.tasks.length).toBe(1);
   });
 });

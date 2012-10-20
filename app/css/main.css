@@ -23,3 +23,6 @@ input{width:250px;}
 .ui-timepicker-rtl{ direction: rtl; }
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+
+
+.icon{width:36px;height:36px;display:inline-block;text-indent:-9999px;background:url('../images/icons.png') no-repeat 0 0;}

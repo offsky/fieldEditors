@@ -25,55 +25,46 @@
 
           <h2>Filters</h2>
           <div class="container" ng-controller="appFilters">
-            <div>
-              <h3>Date &amp; Time Filters</h3>
-              <input type="text" ng-model="currentDate" /><br />
-              <h4>Date:</h4> <b>'yyyy':</b> {{ currentDate | date: 'yyyy' }}, 
-              <b>'yy':</b> {{ currentDate | date: 'yy' }},<br />
-              <h4>Time:</h4> <b>'h:mm:ss a':</b> {{ currentDate | date: 'h:mm:ss a' }},
-              <b>'h:mm a':</b> {{ currentDate | date: 'h:mm a' }}
-
-              <h3>Currency Filters</h3>
-              <input type="text" ng-model="amount" /><br />
-              <h4>US Dollars</h4> <b>'default - $':</b> {{ amount | currency }}<br />
-              <h4>Rubbles</h4> <b>'RUB':</b> {{ amount | currency: 'RUB' }}
-              
-              <hr />
-              <h3>Please get the following filters working if they are not already handled by Angular</h3>
-              
-              <b>Date:</b> {{ 1350400707*1000 | date: 'mediumDate' }} <i> Should display date</i><br />
-              <b>Year:</b> {{ 1350400707*1000 | date: 'yyyy' }} <i> Should display year</i><br />
-              <b>Time:</b> {{ 1350400707*1000 | date: 'shortTime' }} <i> Should display time</i><br />
-              <b>Date + Time:</b> {{ 1350400707*1000 | date: 'medium' }} <i> Should display date with time</i><br />
+              <b>{{ true | checkmark }} Date:</b> {{ 1350400707*1000 | date: 'mediumDate' }} <i> Should display date</i><br />
+              <b>{{ true | checkmark }} Year:</b> {{ 1350400707*1000 | date: 'yyyy' }} <i> Should display year</i><br />
+              <b>{{ true | checkmark }} Time:</b> {{ 1350400707*1000 | date: 'shortTime' }} <i> Should display time</i><br />
+              <b>{{ true | checkmark }} Date + Time:</b> {{ 1350400707*1000 | date: 'medium' }} <i> Should display date with time</i><br />
               <b>Length:</b> {{ 60 | length }} <i> Should display 1 hr.</i><br />
-              <b>Percent:</b> {{ 34 | percent}} <i> Should display 34%</i><br />
-              <b>Integer:</b> {{ 1000 | number}} <i> Should display 1,000</i><br />
-              <b>Decimal:</b> {{ 1000.235 | number:2}} <i> Should display 1,000.24</i><br />
-              <b>Currency:</b> {{ 100.23 | currency}} <i> Should display $100.23</i><br />
-              <b>Text:</b> {{ "foo bar" }} <i> </i><br />
+              <b>{{ true | checkmark }} Percent:</b> {{ 34 | percent}} <i> Should display 34%</i><br />
+              <b>{{ true | checkmark }} Integer:</b> {{ 1000 | number}} <i> Should display 1,000</i><br />
+              <b>{{ true | checkmark }} Decimal:</b> {{ 1000.235 | number:2}} <i> Should display 1,000.24</i><br />
+              <b>{{ true | checkmark }} Currency:</b> {{ 100.23 | currency}} <i> Should display $100.23</i><br />
+              <b>{{ true | checkmark }} Text:</b> {{ "foo bar" }} <i> </i><br />
               <b>List:</b> TBD </i><br />
               <b>Multi List:</b> TBD </i><br />
-              <b>Url:</b> {{ "http://www.apple.com" | url }} <i> Should display a clickable link</i><br />
+              <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | linky'></span> <i> Should display a clickable
+                link</i><br />
               <b>Location:</b> TBD</i><br />
               <b>Rating:</b> {{ 2.3 | rating}} <i> Should display 5 stars with the first 2.3 filled in</i><br />
-              <b>Checkbox:</b> {{ true | checkmark }} <i> Should display a checked box</i><br />
+              <b>{{ true | checkmark }} Checkbox:</b> {{ true | checkmark }} <i> Should display a checked box</i><br />
               <b>Star:</b> {{ true | star }} <i> Should display an icon of a star</i><br />
-              <b>Phone Number:</b> {{ "760-230-1683" | phone }} <i> Should display a link that you can click to call on a mobile device using HTML5 phone tag</i><br />
-              <b>Email Address:</b> {{ "admin@toodledo.com" | email }} <i> Should display a clickable mailto link</i><br />
-              <b>Icon:</b> {{ "frog" | icon }} <i> Should display an icon of a frog. There will be a predefined number of icons that will be in a large sprite image referenced by css.</i><br />
-              <b>ISBN:</b> {{ "978-3-16-123412-0" | isbn }} <i> A clickable link to Amazon that searches for the product. </i><br />
- 
+              <b>{{ true | checkmark }} Phone Number: </b> <span ng-bind-html='"760-230-1683" | phone'></span> <i> Should display a link that
+                you can click to call on a mobile device using HTML5 phone tag</i><br />
+              <b>{{ true | checkmark }} Email Address: </b> <span ng-bind-html='"admin@toodledo.com" | linky'></span> <i> Should display a
+                clickable mailto link</i><br />
+              <p>{{ true | checkmark }} <b>Icon:</b> <span style='{{"frog" | icon}}' class="icon"></span> <i> Should display an icon of a frog.
+                There will be a predefined number of icons that will be in a large sprite image referenced by css.</i></p>
+              <p><b>Sample set of all icons:</b> <span style='{{"dog" | icon}}' class="icon"></span>
+                <span style='{{"tiger" | icon}}' class="icon"></span>
+                <span style='{{"mouse" | icon}}' class="icon"></span>
+                <span style='{{"cat" | icon}}' class="icon"></span>
+                <span style='{{"frog" | icon}}' class="icon"></span></p>
+              <b>{{ true | checkmark }} ISBN: </b> <span ng-bind-html='"978-1-44-934485-6" | isbn'></span> <i> A clickable link to Amazon that searches for the product.</i><br />
 
-            </div>   
-                     
           </div>
           
-          
         </div>
-	      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-	      <script src="js/lib/jquery/jquery-ui-timepicker-addon.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        <script src="js/lib/jquery/jquery-ui-timepicker-addon.js"></script>
         <script src="js/lib/angular/angular.js"></script>
+        <script src="js/lib/angular/angular-sanitize.js"></script>
         <script src="js/lib/angular-ui/angular-ui.js"></script>
 
         <!-- build:js scripts/scripts.js -->

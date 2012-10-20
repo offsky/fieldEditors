@@ -1,6 +1,6 @@
 'use strict';
 
-var filters = angular.module('taskFilters', []);
+var filters = angular.module('taskFilters', ['ngSanitize']);
 
 filters.filter('checkmark', function() {
   return function(input) {
@@ -17,13 +17,7 @@ filters.filter('length', function() {
 
 filters.filter('percent', function() {
   return function(input) {
-    return 'percent';
-  };
-});
-
-filters.filter('url', function() {
-  return function(input) {
-    return 'url';
+      return (input) + '\u0025';
   };
 });
 
@@ -39,10 +33,12 @@ filters.filter('star', function() {
   };
 });
 
-filters.filter('phone', function() {
-  return function(input) {
-    return 'phone';
-  };
+filters.filter('phone', function($filter) {
+    return function(input) {
+        var clean = input.replace(/-/g, ""),
+            output = '<a href="tel:'+clean+'">'+input+'</a>';
+        return output;
+    };
 });
 
 filters.filter('email', function() {
@@ -53,14 +49,30 @@ filters.filter('email', function() {
 
 
 filters.filter('icon', function() {
-  return function(input) {
-    return 'icon';
-  };
+    return function(input) {
+        var icons = ['frog', 'tiger', 'mouse', 'cat', 'dog'],
+            iconWidth = 36,
+            html;
+
+        $.each(icons, function(index) {
+            if (input === icons[index]) {
+                if (!index == 0) {
+                    html = 'background-position: -' + (iconWidth * index) +'px 0';
+                }
+            }
+        });
+
+        return html;
+    };
 });
 
 
 filters.filter('isbn', function() {
-  return function(input) {
-    return 'isbn';
-  };
+    return function(input) {
+        var clean = input.replace(/-/g, ""),
+            html;
+
+        html = '<a href="http://www.amazon.com/s/field-keywords=' + clean +'">'+input+'</a>';
+        return html;
+    };
 });
