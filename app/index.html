@@ -43,7 +43,8 @@
               <b>Location:</b> TBD</i><br />
               <b>{{ true | checkmark }} Rating:</b> <div ng-bind-html-unsafe='2.3 | rating'></div> <i> Should display 5 stars with the first 2.3 filled in</i><br />
               <b>{{ true | checkmark }} Checkbox:</b> {{ true | checkmark }} <i> Should display a checked box</i><br />
-              <b>Star:</b> {{ true | star }} <i> Should display an icon of a star</i><br />
+              <b>{{ true | checkmark }} Star: </b> <span style="{{ false | star }}" class="star"></span>  <i> should display an 'empty' star</i>&nbsp;&nbsp;&nbsp;
+                <span style="{{ true | star }}" class="star"></span>  <i> should display a filled in star</i><br />
               <b>{{ true | checkmark }} Phone Number: </b> <span ng-bind-html='"760-230-1683" | phone'></span> <i> Should display a link that
                 you can click to call on a mobile device using HTML5 phone tag</i><br />
               <b>{{ true | checkmark }} Email Address: </b> <span ng-bind-html='"admin@toodledo.com" | linky'></span> <i> Should display a

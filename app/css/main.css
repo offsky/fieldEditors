@@ -28,5 +28,7 @@ input{width:250px;}
 .icon{width:36px;height:36px;display:inline-block;text-indent:-9999px;background:url(../images/icons.png) no-repeat 0 0;}
 
 .rating{position:relative;overflow:hidden;z-index:1;height:20px;}
-.rating .stars{position:relative;top:-20px;left:0;z-index:3;height:20px;background: url(../images/stars.png) repeat-x 0 0;}
+.rating .stars{position:relative;top:-20px;left:0;z-index:3;height:20px;background: url(../images/rating.png) repeat-x 0 0;}
 .rating .bg{position:relative;top:0;left:0;z-index:2;height:100%;background-color:#B57A15;}
+
+.star{display:inline-block;width:22px;height:20px;background:url(../images/star.png) 0 0;}

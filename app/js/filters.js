@@ -54,7 +54,13 @@ filters.filter('rating', function() {
 
 filters.filter('star', function() {
   return function(input) {
-    return 'star';
+      var html='';
+
+      if (input) {
+        html = 'background-position: 0 -20px';
+      }
+
+    return html;
   };
 });
 
