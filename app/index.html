@@ -24,6 +24,22 @@
           <h1>Tasks</h1>      
           <div class="container" ng-controller="appCtrl" ng-view></div>
 
+
+          <div class="container" ng-controller="appFields">
+            <form name="fields" novalidate>
+              <h2>Fields</h2>
+              <div>
+                <label>Year: </label> 
+                <input type="text" name="year" data-year ng-model="year" maxlength="4" />
+                <span ng-show="fields.year.$error.yearField">Please enter a valid year (should contain 4 numbers).</span>
+              </div>
+              <div>
+                <label>Percent</label>
+                <input type="text" name="percent" data-percent ng-model="percent" />
+                <span ng-show="fields.percent.$error.percentField">Please enter a valid value.</span>
+            </form>
+          </div>
+
           <h2>Filters</h2>
           <div class="container" ng-controller="appFilters">
               <b>{{ true | checkmark }} Date:</b> {{ 1350400707*1000 | date: 'mediumDate' }} <i> Should display date</i><br />

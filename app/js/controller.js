@@ -1,7 +1,7 @@
 'use strict';
 
-fieldEditorsApp.controller('appCtrl', function($scope, allTasks) {
-  var tasks = $scope.tasks = allTasks.get();
+fieldEditorsApp.controller('appCtrl', function($scope, sampleTasks) {
+  var tasks = $scope.tasks = sampleTasks.get();
   
   $scope.pickerOptions = {
     changeMonth: true,
@@ -13,7 +13,7 @@ fieldEditorsApp.controller('appCtrl', function($scope, allTasks) {
 
   $scope.updateField = function() {
     console.log("saving tasks");
-    allTasks.put(tasks);
+    sampleTasks.put(tasks);
   };
 
 });
@@ -23,4 +23,8 @@ fieldEditorsApp.controller('appFilters', function($scope) {
   var rightNow = new Date();
   $scope.currentDate = rightNow;
   $scope.amount = 1234.56;
+});
+
+fieldEditorsApp.controller('appFields', function($scope) {
+  
 });

@@ -1,5 +1,5 @@
 'use strict';
-var filters = angular.module('taskFilters', ['ngSanitize']);
+var filters = angular.module('appFilters', ['ngSanitize']);
 
 filters.filter('checkmark', function() {
   return function(input) {

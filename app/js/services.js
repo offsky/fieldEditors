@@ -1,8 +1,9 @@
 'use strict';
 
 /* Services */
-angular.module('taskServices', []).
-  factory('allTasks', function() {
+var helpers = angular.module('appHelpers', []);
+
+helpers.factory('sampleTasks', function() {
     var STORAGE_ID = 'tasks';
     if (!localStorage.getItem(STORAGE_ID)) {
       var sampleData = [
