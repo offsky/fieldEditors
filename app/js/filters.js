@@ -66,7 +66,7 @@ filters.filter('star', function() {
 
 filters.filter('phone', function($filter) {
     return function(input) {
-        var clean = input.replace(/-/g, ""),
+        var clean = input.replace(/[\-\.() ]/g, ""),
             html = '<a href="tel:'+clean+'">'+input+'</a>';
         return html;
     };

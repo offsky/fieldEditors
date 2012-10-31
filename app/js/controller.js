@@ -26,5 +26,5 @@ fieldEditorsApp.controller('appFilters', function($scope) {
 });
 
 fieldEditorsApp.controller('appFields', function($scope) {
-  
+
 });
