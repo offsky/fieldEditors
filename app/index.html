@@ -47,7 +47,8 @@
                 <label>Phone Number</label>
                 <input type="text" editing="showEdit" preview="showInput" ng-show="showInput" name="phone" data-phone ng-model="phone" />
                 <span ng-show="fields.phone.$error.phoneField">Please enter a valid phone number.</span>
-                <a ng-show="showEdit" ng-click="editField()">edit</a>
+                <a ng-show="showEdit" ng-click="editField()" style='{{"tiger" | icon}}' class="icon">edit</a>
+                <br />Note: the tiger icon, which shows up when phone number is valid, actually is an edit button (using a sample/fake icon sprite via icon filter)
             </div>
         </form>
     </div>
