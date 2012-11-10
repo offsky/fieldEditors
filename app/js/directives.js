@@ -50,7 +50,7 @@ directives.directive('percent', function($filter) {
 
       });
 
-      angular.element(element).bind('keypress', function(e) {
+      element.bind('keypress', function(e) {
         var value = this.value || "0";
         if (e.charCode === 13) {
           if (value.indexOf("%") == -1) {
@@ -59,7 +59,7 @@ directives.directive('percent', function($filter) {
         }
       });
 
-      angular.element(element).bind('blur', function(){
+      element.bind('blur', function(){
         var value = this.value || "0";
         if (value.indexOf("%") == -1) {
           this.value = applyFilter(value);
@@ -92,7 +92,7 @@ directives.directive('currency', function($filter) {
 
       });
 
-      angular.element(element).bind('keypress', function(e) {
+      element.bind('keypress', function(e) {
         var value = this.value;
         if (e.charCode === 13) {
           if (value.indexOf("$") == -1) {
@@ -101,7 +101,7 @@ directives.directive('currency', function($filter) {
         }
       });
 
-      angular.element(element).bind('blur', function(){
+      element.bind('blur', function(){
         var value = this.value;
         if (value.indexOf("$") == -1) {
           this.value = applyFilter(value);

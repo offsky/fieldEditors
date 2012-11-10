@@ -57,7 +57,7 @@ describe('filter', function() {
         });
     });
 
-    beforeEach(module('taskFilters'));
+    beforeEach(module('appFilters'));
 
     describe('length', function() {
         it('should convert minutes to hours + minutes', inject(function(lengthFilter) {
@@ -77,6 +77,9 @@ describe('filter', function() {
     describe('percent', function() {
         it('should convert integer value to percentage', inject(function(percentFilter) {
             expect(percentFilter(34)).toBe('34\u0025');
+        }));
+        it('should return empty string', inject(function(percentFilter) {
+            expect(percentFilter('abcd')).toBe('');
         }));
     });
 

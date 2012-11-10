@@ -33,7 +33,12 @@ filters.filter('length', function() {
 
 filters.filter('percent', function() {
   return function(input) {
-      return (input) + '\u0025';
+      var clean = parseFloat(input),
+          output = '';
+
+      if (!isNaN(clean)) { output = clean + '\u0025' }
+
+      return output;
   };
 });
 
