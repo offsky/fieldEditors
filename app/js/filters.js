@@ -102,8 +102,6 @@ filters.filter('url', function($filter) {
         var output = '',
             html = '';
 
-        console.log(input);
-
         if (URL_REGEXP.test(input)) {
             html = $filter('linky')(input);
         } else {
