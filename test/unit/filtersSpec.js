@@ -1,7 +1,5 @@
 'use strict';
 
-/* jasmine specs for filters go here */
-
 describe('filter', function() {
 
     describe('date', function() {
@@ -44,26 +42,46 @@ describe('filter', function() {
         });
     });
 
-    describe('linky', function() {
+    beforeEach(module('appFilters'));
+
+    describe('isUrl', function() {
         var linky;
 
         beforeEach(inject(function($filter) {
             linky =  $filter('linky');
         }));
 
-        it('should convert url string into a clickable link', function() {
-            expect(linky("http://www.apple.com")).toEqual('<a href="http://www.apple.com">http://www.apple.com</a>');
+        it('should convert email address string into a clickable link', function() {
             expect(linky("admin@toodledo.com")).toEqual('<a href="mailto:admin@toodledo.com">admin@toodledo.com</a>');
         });
+
+        it('should convert url string into a clickable link', inject(function(urlFilter) {
+            expect(linky("http://www.apple.com")).toEqual('<a href="http://www.apple.com">http://www.apple.com</a>');
+            expect(linky("https://www.apple.com")).toEqual('<a href="https://www.apple.com">https://www.apple.com</a>');
+            expect(urlFilter("www.apple.com")).toEqual('<a href="http://www.apple.com">http://www.apple.com</a>');
+        }));
+
+        it('should return empty string', inject(function(urlFilter) {
+            expect(urlFilter('')).toBe('');
+            expect(urlFilter('abcd')).toBe('');
+        }));
     });
 
-    beforeEach(module('appFilters'));
 
     describe('length', function() {
         it('should convert minutes to hours + minutes', inject(function(lengthFilter) {
             expect(lengthFilter(660)).toBe('11hrs');
             expect(lengthFilter(65)).toBe('1hr 5mins');
             expect(lengthFilter(1)).toBe('1min');
+        }));
+
+        it('should return empty string', inject(function(lengthFilter) {
+            expect(lengthFilter({})).toBe('0');
+            expect(lengthFilter([])).toBe('0');
+            expect(lengthFilter(true)).toBe('0');
+            expect(lengthFilter(false)).toBe('0');
+            expect(lengthFilter('')).toBe('0');
+            expect(lengthFilter('abcd')).toBe('0');
         }));
     });
 
@@ -79,12 +97,12 @@ describe('filter', function() {
             expect(percentFilter(34)).toBe('34\u0025');
         }));
         it('should return empty string', inject(function(percentFilter) {
+            expect(percentFilter({})).toBe('');
+            expect(percentFilter([])).toBe('');
+            expect(percentFilter(true)).toBe('');
+            expect(percentFilter(false)).toBe('');
+            expect(percentFilter('')).toBe('');
             expect(percentFilter('abcd')).toBe('');
         }));
     });
-
-
-
-
-    
 });

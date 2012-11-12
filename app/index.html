@@ -67,7 +67,7 @@
         <b>{{ true | checkmark }} Text:</b> {{ "foo bar" }} <i> </i><br />
         <b>List:</b> TBD </i><br />
         <b>Multi List:</b> TBD </i><br />
-        <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | linky'></span> <i> Should display a clickable
+        <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | url'></span>  <br /><span ng-bind-html='"www.apple.com" | url'></span><br /><span ng-bind-html='"apple" | url'></span> <i> Should display a clickable
         link</i><br />
         <b>Location:</b> TBD</i><br />
         <b>{{ true | checkmark }} Rating:</b> <div ng-bind-html-unsafe='2.3 | rating'></div> <i> Should display 5 stars with the first 2.3 filled in</i><br />

@@ -1,6 +1,8 @@
 'use strict';
 var filters = angular.module('appFilters', ['ngSanitize']);
 
+var URL_REGEXP = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+
 filters.filter('checkmark', function() {
   return function(input) {
     return input ? '\u2713' : '\u2718';
@@ -69,7 +71,7 @@ filters.filter('star', function() {
   };
 });
 
-filters.filter('phone', function($filter) {
+filters.filter('phone', function() {
     return function(input) {
         var clean = input.replace(/[\-\.() ]/g, ""),
             html = '<a href="tel:'+clean+'">'+input+'</a>';
@@ -95,6 +97,25 @@ filters.filter('icon', function() {
     };
 });
 
+filters.filter('url', function($filter) {
+    return function(input) {
+        var output = '',
+            html = '';
+
+        console.log(input);
+
+        if (URL_REGEXP.test(input)) {
+            html = $filter('linky')(input);
+        } else {
+            if (input.indexOf(".") >= 0) {
+                output = 'http://' + input;
+                html = '<a href="' + output + '">' + output + '</a>';
+            }
+        }
+
+        return html;
+    };
+});
 
 filters.filter('isbn', function() {
     return function(input) {
