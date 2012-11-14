@@ -63,7 +63,7 @@ describe('filter', function() {
 
         it('should return empty string', inject(function(urlFilter) {
             expect(urlFilter('')).toBe('');
-            expect(urlFilter('abcd')).toBe('');
+            expect(urlFilter('abcd')).toBe('abcd');
         }));
     });
 

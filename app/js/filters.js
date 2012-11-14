@@ -108,6 +108,8 @@ filters.filter('url', function($filter) {
             if (input.indexOf(".") >= 0) {
                 output = 'http://' + input;
                 html = '<a href="' + output + '">' + output + '</a>';
+            } else {
+                html = input;
             }
         }
 
