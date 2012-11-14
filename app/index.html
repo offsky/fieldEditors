@@ -60,15 +60,14 @@
         <b>{{ true | checkmark }} Time:</b> {{ 1350400707*1000 | date: 'shortTime' }} <i> Should display time</i><br />
         <b>{{ true | checkmark }} Date + Time:</b> {{ 1350400707*1000 | date: 'medium' }} <i> Should display date with time</i><br />
         <b>{{ true | checkmark }} Length:</b> {{ 60 | length }} <i> Should display 1 hr.</i><br />
-        <b>{{ true | checkmark }} Percent:</b> {{ 34 | percent}} <i> Should display 34%</i><br />
+        <b>{{ true | checkmark }} Percent:</b> {{ 34 | percent}} <i> Should display 34%</i> and '{{ 'foo' | percent}}' <i> Should display ''</i><br />
         <b>{{ true | checkmark }} Integer:</b> {{ 1000 | number}} <i> Should display 1,000</i><br />
         <b>{{ true | checkmark }} Decimal:</b> {{ 1000.235 | number:2}} <i> Should display 1,000.24</i><br />
         <b>{{ true | checkmark }} Currency:</b> {{ 100.23 | currency}} <i> Should display $100.23</i><br />
         <b>{{ true | checkmark }} Text:</b> {{ "foo bar" }} <i> </i><br />
         <b>List:</b> TBD </i><br />
         <b>Multi List:</b> TBD </i><br />
-        <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | url'></span>  <br /><span ng-bind-html='"www.apple.com" | url'></span><br /><span ng-bind-html='"apple" | url'></span> <i> Should display a clickable
-        link</i><br />
+        <b>{{ true | checkmark }} Url: </b> <span ng-bind-html='"http://www.apple.com" | url'></span>  and <span ng-bind-html='"www.apple.com" | url'></span> <i> Should display a clickable link</i>  and '<span ng-bind-html='"apple" | url'></span>' should not be clickable <br />
         <b>Location:</b> TBD</i><br />
         <b>{{ true | checkmark }} Rating:</b> <div ng-bind-html-unsafe='2.3 | rating'></div> <i> Should display 5 stars with the first 2.3 filled in</i><br />
         <b>{{ true | checkmark }} Checkbox:</b> {{ true | checkmark }} <i> Should display a checked box</i><br />
