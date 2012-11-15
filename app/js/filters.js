@@ -12,8 +12,16 @@ filters.filter('checkmark', function() {
 filters.filter('length', function() {
     return function(input) {
 
-        var clean = parseInt(input),
+        var values = ['hrs','hr','mins','min'],
+            len = values.length,
+            clean = parseInt(input),
             output, mod, hours;
+
+        while(len--) {
+            if (input.toString().indexOf(values[len]) !== -1) {
+                return input;
+            }
+        }
 
         if(clean < 60 && clean > 0) {
             output = (clean === 1) ? clean + 'min' : clean + 'mins';
@@ -61,7 +69,7 @@ filters.filter('rating', function() {
 
 filters.filter('star', function() {
   return function(input) {
-      var html='';
+      var html = '';
 
       if (input) {
         html = 'background-position: 0 -20px';
@@ -83,7 +91,7 @@ filters.filter('icon', function() {
     return function(input) {
         var icons = ['frog', 'tiger', 'mouse', 'cat', 'dog'],
             iconWidth = 36,
-            html;
+            html = '';
 
         $.each(icons, function(index) {
             if (input === icons[index]) {
@@ -94,6 +102,16 @@ filters.filter('icon', function() {
         });
 
         return html;
+    };
+});
+
+filters.filter('money', function($filter) {
+    return function(input) {
+        if(!input) return '';
+        var clean = input.toString().replace(/[^0-9,.]/g, ''),
+            output = parseFloat(clean);
+        if (output == 0) return '';
+        return $filter('currency')(output);
     };
 });
 
@@ -119,10 +137,8 @@ filters.filter('url', function($filter) {
 
 filters.filter('isbn', function() {
     return function(input) {
-        var clean = input.replace(/-/g, ""),
-            html;
-
-        html = '<a href="http://www.amazon.com/s/field-keywords=' + clean +'">'+input+'</a>';
+        var clean = input.replace(/-/g, ''),
+            html = '<a href="http://www.amazon.com/s/field-keywords=' + clean +'">'+input+'</a>';
 
         return html;
     };

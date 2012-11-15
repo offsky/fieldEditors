@@ -35,27 +35,29 @@ describe('filter', function() {
         });
     });
 
-    describe('currency', function() {
-        var currencyFilter;
+    beforeEach(module('appFilters'));
+
+    describe('money', function() {
+        var moneyFilter;
 
         beforeEach(inject(function($filter) {
-            currencyFilter =  $filter('currency');
+            moneyFilter = $filter('money');
         }));
 
         it('should format dollar currency', function() {
-            expect(currencyFilter(123.00)).toBe('$123.00');
+            expect(moneyFilter(123.00)).toBe('$123.00');
         });
         
          it('should format dollar currency even if already formatted', function() {
-            expect(currencyFilter("$123.00")).toBe('$123.00');
+            expect(moneyFilter("$123.00")).toBe('$123.00');
         });
         
          it('should be empty string for invalid', function() {
-            expect(currencyFilter("foo")).toBe('');
+            expect(moneyFilter("foo")).toBe('');
         });
     });
 
-    beforeEach(module('appFilters'));
+
 
 	describe('email', function() {
         var linky;
@@ -75,96 +77,155 @@ describe('filter', function() {
     });
     
     describe('isUrl', function() {
-        var linky;
+        var linky,
+            urlFilter;
 
         beforeEach(inject(function($filter) {
             linky =  $filter('linky');
+            urlFilter = $filter('url');
         }));
 
-        it('should convert url string into a clickable link', inject(function(urlFilter) {
+        it('should convert url string into a clickable link', function() {
             expect(urlFilter("http://www.apple.com")).toEqual('<a href="http://www.apple.com">http://www.apple.com</a>');
             expect(urlFilter("https://www.apple.com")).toEqual('<a href="https://www.apple.com">https://www.apple.com</a>');
             expect(urlFilter("www.apple.com")).toEqual('<a href="http://www.apple.com">http://www.apple.com</a>');
-        }));
+        });
 
-        it('should echo non-link results', inject(function(urlFilter) {
+        it('should echo non-link results', function() {
             expect(urlFilter('')).toBe('');
             expect(urlFilter('abcd')).toBe('abcd');
-        }));
+        });
     });
 
  	describe('rating', function() {
-        it('should have a test', inject(function(urlFilter) {
+         var ratingFilter;
+
+         beforeEach(inject(function($filter) {
+             ratingFilter = $filter('rating');
+         }));
+
+        it('should have a test', function() {
             expect(1).toEqual(2);
-        }));
+        });
     });
+
 	describe('star', function() {
-        it('should have a test', inject(function(urlFilter) {
-            expect(1).toEqual(2);
+        var starFilter;
+
+        beforeEach(inject(function($filter) {
+            starFilter = $filter('star');
         }));
+
+        it('should have a test', function() {
+            expect(1).toEqual(2);
+        });
     });
+
 	describe('icon', function() {
-        it('should have a test', inject(function(urlFilter) {
-            expect(1).toEqual(2);
+        var iconFilter;
+
+        beforeEach(inject(function($filter) {
+            iconFilter = $filter('icon');
         }));
+
+        it('should have a test', function() {
+            expect(1).toEqual(2);
+        });
     });
+
     describe('phone', function() {
-        it('should have a test', inject(function(urlFilter) {
-            expect(1).toEqual(2);
+        var phoneFilter;
+
+        beforeEach(inject(function($filter) {
+            phoneFilter = $filter('phone');
         }));
+
+
+        it('should have a test', function() {
+            expect(1).toEqual(2);
+        });
     });
+
     describe('isbn', function() {
-        it('should have a test', inject(function(urlFilter) {
-            expect(1).toEqual(2);
+        var isbnFilter;
+
+        beforeEach(inject(function($filter) {
+            isbnFilter = $filter('isbn');
         }));
+
+        it('should have a test', function() {
+            expect(1).toEqual(2);
+        });
     });
     
     describe('length', function() {
-        it('should convert minutes to hours + minutes', inject(function(lengthFilter) {
+        var lengthFilter;
+
+        beforeEach(inject(function($filter) {
+            lengthFilter = $filter('length');
+        }));
+
+        it('should convert minutes to hours + minutes', function() {
             expect(lengthFilter(660)).toBe('11hrs');
             expect(lengthFilter(65)).toBe('1hr 5mins');
             expect(lengthFilter(1)).toBe('1min');
-        }));
-		 it('should pass through already formatted values', inject(function(lengthFilter) {
+        });
+
+        it('should pass through already formatted values', function() {
             expect(lengthFilter("11hrs")).toBe('11hrs');
             expect(lengthFilter("1hr 5mins")).toBe('1hr 5mins');
             expect(lengthFilter("1min")).toBe('1min');
-        }));
-        it('should return empty string', inject(function(lengthFilter) {
+        });
+
+        it('should return empty string', function() {
             expect(lengthFilter({})).toBe('0');
             expect(lengthFilter([])).toBe('0');
             expect(lengthFilter(true)).toBe('0');
             expect(lengthFilter(false)).toBe('0');
             expect(lengthFilter('')).toBe('0');
             expect(lengthFilter('abcd')).toBe('0');
-        }));
+        });
     });
 
     describe('checkmark', function() {
-        it('should convert boolean values to unicode checkmark or cross', inject(function(checkmarkFilter) {
+        var checkmarkFilter;
+
+        beforeEach(inject(function($filter) {
+            checkmarkFilter = $filter('checkmark');
+        }));
+
+        it('should convert boolean values to unicode checkmark or cross', function() {
             expect(checkmarkFilter(true)).toBe('\u2713');
             expect(checkmarkFilter(1)).toBe('\u2713');
             expect(checkmarkFilter("something")).toBe('\u2713');
             expect(checkmarkFilter(false)).toBe('\u2718');
             expect(checkmarkFilter(null)).toBe('\u2718');
             expect(checkmarkFilter(0)).toBe('\u2718');
-        }));
+        });
     });
 
     describe('percent', function() {
-        it('should convert integer value to percentage', inject(function(percentFilter) {
+        var percentFilter;
+
+        beforeEach(inject(function($filter) {
+            percentFilter = $filter('percent');
+        }));
+
+        it('should convert integer value to percentage', function() {
             expect(percentFilter(34)).toBe('34\u0025');
-        }));
-        it('should pass through already converted value', inject(function(percentFilter) {
+        });
+
+        it('should pass through already converted value', function() {
             expect(percentFilter("34%")).toBe('34\u0025');
-        }));
-        it('should return empty string', inject(function(percentFilter) {
+        });
+
+        it('should return empty string', function() {
             expect(percentFilter({})).toBe('');
             expect(percentFilter([])).toBe('');
             expect(percentFilter(true)).toBe('');
             expect(percentFilter(false)).toBe('');
             expect(percentFilter('')).toBe('');
             expect(percentFilter('abcd')).toBe('');
-        }));
+        });
     });
 });
