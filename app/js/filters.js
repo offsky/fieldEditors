@@ -10,24 +10,19 @@ filters.filter('checkmark', function() {
 });
 
 filters.filter('length', function() {
-    return function(input) {
 
-        var values = ['hrs','hr','mins','min'],
-            len = values.length,
-            clean = parseInt(input),
-            output, mod, hours;
+    function parseHrsMins(value) {
+        var output = '',
+            hours = 0,
+            mod = 0;
 
-        while(len--) {
-            if (input.toString().indexOf(values[len]) !== -1) {
-                return input;
-            }
-        }
+        //console.log("parseHrsMins: " + value);
 
-        if(clean < 60 && clean > 0) {
-            output = (clean === 1) ? clean + 'min' : clean + 'mins';
-        } else if (clean >= 60){
-            mod = clean % 60;
-            hours = Math.round(clean / 60);
+        if(value < 60 && value > 0) {
+            output = (value === 1) ? value + 'min' : value + 'mins';
+        } else if (value >= 60){
+            mod = value % 60;
+            hours = Math.round((value-mod) / 60);
             output =  (hours === 1) ? hours + 'hr': hours + 'hrs';
 
             if (mod > 0 ) {
@@ -35,8 +30,79 @@ filters.filter('length', function() {
             }
         } else {
             //catching negative values
-            output = '0';
+            output = '';
         }
+
+        return output;
+    }
+
+    function adjustHrsMins(value, reformatValues) {
+        var clean = parseInt(value, 10);
+
+        //console.log("addHrsMins: " + value + "; reformatValues: " + reformatValues + "; clean: " + clean);
+
+        if ((reformatValues[0].indexOf('h') !== -1) && ((clean > 1) || (clean === 1))) {
+            clean = clean*60;
+        }
+        return parseHrsMins(clean);
+    }
+
+    function reformatHrsMins(value) {
+        var values = value.split(' '),
+            len = values.length,
+            cleanValues = [],
+            minutes;
+
+        //console.log("reformatHrsMins: " + value + "; Split values: " + values);
+
+        while (len--) {
+            cleanValues.unshift(parseInt(values[len], 10));
+        }
+
+        minutes = cleanValues[0]*60+cleanValues[1];
+
+        return parseHrsMins(minutes);
+    }
+
+    return function(input) {
+        //console.log("+++++++ FILTER FOR " + input + " +++++");
+
+        var values = ['h', 'hr', 'hour', 'hrs', 'hours', 'm', 'min', 'minute', 'mins', 'minutes'],
+            valuesLength = values.length,
+            clean = parseInt(input, 10),
+            output = '',
+            reformatValues = [],
+            matchCount = 0,
+            re, reFound = false;
+
+        while (valuesLength--) {
+            re = new RegExp('\\B' + values[valuesLength] + '\\b', 'g');
+            reFound = re.test(input.toString());
+
+            //console.log("Input: " + input + "; Found: " + reFound + "; Search Value: " + values[valuesLength]);
+
+            if (reFound) {
+                matchCount++;
+                reformatValues.push(values[valuesLength]);
+            }
+        }
+
+        //console.log("reformat values length: " + reformatValues.length + "; reformat values: " + reformatValues );
+
+        switch(matchCount) {
+            case 0:
+                output = parseHrsMins(clean);
+                break;
+            case 1:
+                output = adjustHrsMins(input, reformatValues);
+                break;
+            case 2:
+                output = reformatHrsMins(input);
+                break;
+            default:
+                output = '';
+        }
+
         return output;
     };
 });

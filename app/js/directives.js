@@ -213,7 +213,7 @@ directives.directive('fieldItem', function($filter) {
       });
     }
 
-    function connectLengthField() {
+    /*function connectLengthField() {
       var inputEl = $(element).find('input'),
         originalValue = inputEl.val();
 
@@ -227,7 +227,7 @@ directives.directive('fieldItem', function($filter) {
         scope.updateField();
       });
 
-    }
+    }    */
 
     scope.$watch('field.type', function(value) {
       switch (value) {
@@ -238,7 +238,7 @@ directives.directive('fieldItem', function($filter) {
           connectIntegerField();
           break;
         case 'length':
-          connectLengthField();
+          //connectLengthField();
           break;
         default:
           $(element).find('input').blur(function() {
