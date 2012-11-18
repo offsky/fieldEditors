@@ -5,6 +5,41 @@ var filters = angular.module('appFilters', ['ngSanitize']);
 var URL_REGEXP = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
     ISBN_REGEXP = /^[0-9-]{8,17}$/;
 
+filters.filter('time', function() {
+    return function(input) {
+        var output = '',
+            date, ampm, hours, minutes;
+
+        if (angular.isUndefined(input)) return output;
+        if (angular.isNumber(input)) date = new Date(input*1000);
+        if (!angular.isDate(date)) return output;
+
+        hours = date.getUTCHours();
+        minutes = date.getUTCMinutes();
+
+        ampm = (hours >= 12) ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        output = hours + ":" + minutes + " " + ampm;
+
+        return output;
+    };
+});
+
+filters.filter('num', function($filter) {
+
+    return function(input, fractionSize) {
+        var output;
+
+        if (angular.isUndefined(input) || !angular.isNumber(input)) return '';
+
+        output = $filter('number')(input,fractionSize);
+
+        return output;
+    };
+});
+
 filters.filter('checkmark', function() {
   return function(input) {
     return input ? '\u2713' : '\u2718';
@@ -79,7 +114,7 @@ filters.filter('length', function() {
 
         while (valuesLength--) {
             re = new RegExp('\\B' + values[valuesLength] + '\\b', 'g');
-            reFound = re.test(input.toString());
+            reFound = re.test(input);
 
             //console.log("Input: " + input + "; Found: " + reFound + "; Search Value: " + values[valuesLength]);
 
@@ -210,7 +245,7 @@ filters.filter('isbn', function() {
             clean = input.replace(/-/g, '');
             html = '<a href="http://www.amazon.com/s/field-keywords=' + clean +'">'+input+'</a>';
         } else  {
-            html = (input === undefined) ? '' : input;
+            html = (angular.isUndefined(input)) ? '' : input;
         }
 
         return html;

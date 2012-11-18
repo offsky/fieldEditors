@@ -1,6 +1,7 @@
 'use strict';
 
 describe('filter', function() {
+    beforeEach(module('appFilters'));
 
     describe('date', function() {
         var dateFilter;
@@ -22,20 +23,46 @@ describe('filter', function() {
         });
     });
 
+    describe('time', function() {
+       var timeFilter;
+
+        beforeEach(inject(function($filter) {
+            timeFilter = $filter('time');
+        }));
+
+        it('should properly format/convert unix time', function() {
+            expect(timeFilter(0)).toEqual('12:00 am');
+            expect(timeFilter(60)).toEqual('12:01 am');
+            expect(timeFilter(21600)).toEqual('6:00 am');
+            expect(timeFilter(86399)).toEqual('11:59 pm');
+            expect(timeFilter(86400)).toEqual('12:00 am');
+        });
+
+        it('should properly format empty or invalid as empty string', function() {
+            expect(timeFilter(undefined)).toEqual('');
+            expect(timeFilter('')).toEqual('');
+            expect(timeFilter('foo')).toEqual('');
+        });
+    });
+
     describe('number', function() {
         var numberFilter;
 
         beforeEach(inject(function($filter) {
-            numberFilter =  $filter('number');
+            numberFilter =  $filter('num');
         }));
 
         it('should format integer', function() {
             expect(numberFilter(1234)).toBe('1,234');
-            //expect(numberFilter(1234.235)).toEqual('1,234.24');
+            expect(numberFilter(1234.237, 2)).toEqual('1,234.24');
+        });
+
+        it('should properly format empty or invalid as empty string', function() {
+            expect(numberFilter(undefined)).toEqual('');
+            expect(numberFilter('')).toEqual('');
+            expect(numberFilter('foo')).toEqual('');
         });
     });
-
-    beforeEach(module('appFilters'));
 
     describe('money', function() {
         var moneyFilter;
@@ -57,8 +84,6 @@ describe('filter', function() {
         });
     });
 
-
-
 	describe('email', function() {
         var linky;
 
@@ -76,7 +101,7 @@ describe('filter', function() {
         });
     });
     
-    describe('isUrl', function() {
+    describe('url', function() {
         var linky,
             urlFilter;
 
