@@ -1,7 +1,9 @@
 'use strict';
+
 var filters = angular.module('appFilters', ['ngSanitize']);
 
-var URL_REGEXP = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+var URL_REGEXP = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
+    ISBN_REGEXP = /^[0-9-]{8,17}$/;
 
 filters.filter('checkmark', function() {
   return function(input) {
@@ -176,7 +178,7 @@ filters.filter('money', function($filter) {
         if(!input) return '';
         var clean = input.toString().replace(/[^0-9,.]/g, ''),
             output = parseFloat(clean);
-        if (output == 0) return '';
+        if (output === 0) return '';
         return $filter('currency')(output);
     };
 });
@@ -203,8 +205,13 @@ filters.filter('url', function($filter) {
 
 filters.filter('isbn', function() {
     return function(input) {
-        var clean = input.replace(/-/g, ''),
+        var html, clean;
+        if(ISBN_REGEXP.test(input)) {
+            clean = input.replace(/-/g, '');
             html = '<a href="http://www.amazon.com/s/field-keywords=' + clean +'">'+input+'</a>';
+        } else  {
+            html = (input === undefined) ? '' : input;
+        }
 
         return html;
     };

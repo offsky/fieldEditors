@@ -153,8 +153,14 @@ describe('filter', function() {
             isbnFilter = $filter('isbn');
         }));
 
-        it('should have a test', function() {
-            expect(1).toEqual(2);
+        it('should render isbn as a clickable link that opens a results page on amazon.com', function() {
+            expect(isbnFilter("978-1-44-934485-6")).toEqual('<a href="http://www.amazon.com/s/field-keywords=9781449344856">978-1-44-934485-6</a>');
+        });
+
+        it('should echo non-link results', function() {
+            expect(isbnFilter(undefined)).toBe('');
+            expect(isbnFilter('')).toBe('');
+            expect(isbnFilter('abcd')).toBe('abcd');
         });
     });
     
