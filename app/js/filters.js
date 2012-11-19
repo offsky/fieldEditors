@@ -27,12 +27,23 @@ filters.filter('time', function() {
     };
 });
 
+filters.filter('validDate', function($filter) {
+    return function(input, dateFormat) {
+        var output = '';
+
+        if (angular.isUndefined(input)) return output;
+        output = (angular.isNumber(input)) ? $filter('date')(input,dateFormat) : output;
+
+        return output;
+    };
+});
+
 filters.filter('num', function($filter) {
 
     return function(input, fractionSize) {
-        var output;
+        var output = '';
 
-        if (angular.isUndefined(input) || !angular.isNumber(input)) return '';
+        if (angular.isUndefined(input) || !angular.isNumber(input)) return output;
 
         output = $filter('number')(input,fractionSize);
 
@@ -210,11 +221,20 @@ filters.filter('icon', function() {
 
 filters.filter('money', function($filter) {
     return function(input) {
-        if(!input) return '';
-        var clean = input.toString().replace(/[^0-9,.]/g, ''),
-            output = parseFloat(clean);
-        if (output === 0) return '';
-        return $filter('currency')(output);
+        var output = '', clean;
+
+        if (angular.isUndefined(input)) return output;
+
+        if (angular.isString(input)) {
+            input = parseFloat(input.replace(/[$]/g, ''));
+        }
+
+        if (angular.isNumber(input)) {
+            clean = parseFloat(input);
+            output = (clean !== 0) ? $filter('currency')(clean) : output;
+        }
+
+        return output;
     };
 });
 

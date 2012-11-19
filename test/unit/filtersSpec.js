@@ -7,7 +7,7 @@ describe('filter', function() {
         var dateFilter;
 
         beforeEach(inject(function($filter) {
-            dateFilter =  $filter('date');
+            dateFilter =  $filter('validDate');
         }));
 
         it('should properly format/convert unix time', function() {
@@ -18,6 +18,10 @@ describe('filter', function() {
         });
         
          it('should properly format empty or invalid as empty string', function() {
+            expect(dateFilter({})).toBe('');
+            expect(dateFilter([])).toBe('');
+            expect(dateFilter(true)).toBe('');
+            expect(dateFilter(false)).toBe('');
             expect(dateFilter('', 'mediumDate')).toEqual('');
             expect(dateFilter('foo', 'yyyy')).toEqual('');
         });
@@ -40,6 +44,10 @@ describe('filter', function() {
 
         it('should properly format empty or invalid as empty string', function() {
             expect(timeFilter(undefined)).toEqual('');
+            expect(timeFilter({})).toBe('');
+            expect(timeFilter([])).toBe('');
+            expect(timeFilter(true)).toBe('');
+            expect(timeFilter(false)).toBe('');
             expect(timeFilter('')).toEqual('');
             expect(timeFilter('foo')).toEqual('');
         });
@@ -59,6 +67,10 @@ describe('filter', function() {
 
         it('should properly format empty or invalid as empty string', function() {
             expect(numberFilter(undefined)).toEqual('');
+            expect(numberFilter({})).toBe('');
+            expect(numberFilter([])).toBe('');
+            expect(numberFilter(true)).toBe('');
+            expect(numberFilter(false)).toBe('');
             expect(numberFilter('')).toEqual('');
             expect(numberFilter('foo')).toEqual('');
         });
@@ -75,11 +87,17 @@ describe('filter', function() {
             expect(moneyFilter(123.00)).toBe('$123.00');
         });
         
-         it('should format dollar currency even if already formatted', function() {
+        it('should format dollar currency even if already formatted', function() {
             expect(moneyFilter("$123.00")).toBe('$123.00');
         });
         
-         it('should be empty string for invalid', function() {
+        it('should be empty string for invalid', function() {
+            expect(moneyFilter(undefined)).toEqual('');
+            expect(moneyFilter({})).toBe('');
+            expect(moneyFilter([])).toBe('');
+            expect(moneyFilter(true)).toBe('');
+            expect(moneyFilter(false)).toBe('');
+            expect(moneyFilter('')).toEqual('');
             expect(moneyFilter("foo")).toBe('');
         });
     });
