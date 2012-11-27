@@ -230,6 +230,9 @@ describe('filter', function() {
             expect(lengthFilter("1m")).toBe("1min");
             expect(lengthFilter("1minute")).toBe("1min");
             expect(lengthFilter("11hr")).toBe("11hrs");
+            expect(lengthFilter("1.5h")).toBe("1hr 30mins");
+            expect(lengthFilter("5.30h")).toBe("5hrs 18mins");
+            expect(lengthFilter("5.015h")).toBe("5hrs 1min");
         });
 
         it('should pass through already formatted values', function() {

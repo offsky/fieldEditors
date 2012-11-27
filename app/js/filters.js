@@ -60,6 +60,7 @@ filters.filter('checkmark', function() {
 filters.filter('length', function() {
 
     function parseHrsMins(value) {
+        // value should be passed in minutes
         var output = '',
             hours = 0,
             mod = 0;
@@ -112,16 +113,30 @@ filters.filter('length', function() {
         return parseHrsMins(minutes);
     }
 
+    function padZero(number) {
+        return ((parseFloat(number) < 10) ? "0" : "") + Math.round(number);
+    }
+
     return function(input) {
         //console.log("+++++++ FILTER FOR " + input + " +++++");
 
         var values = ['h', 'hr', 'hour', 'hrs', 'hours', 'm', 'min', 'minute', 'mins', 'minutes'],
             valuesLength = values.length,
+            decimalTime = input.toString().split("."),
             clean = parseInt(input, 10),
             output = '',
             reformatValues = [],
             matchCount = 0,
             re, reFound = false;
+
+
+        if (angular.isObject(decimalTime) && decimalTime.length === 2) {
+            var hours = parseInt(decimalTime[0], 10),
+                mins = decimalTime[1].replace(/\D/g,''),
+                minutes = parseInt(padZero((mins / Math.pow(10, mins.length))*60), 10);
+
+            return parseHrsMins((hours*60) + minutes);
+        }
 
         while (valuesLength--) {
             re = new RegExp('\\B' + values[valuesLength] + '\\b', 'g');
